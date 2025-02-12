@@ -16,6 +16,12 @@ body {
     border-radius: 10px;
 }
 
+.logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .h1 {
     font-size: 28px;
     font-weight: bold;
@@ -46,7 +52,7 @@ input[type="password"] {
     border-radius: 5px;
 }
 
-button {
+.button {
     width: 100%;
     padding: 10px;
     background-color: #4caf50;
@@ -59,7 +65,7 @@ button {
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #84c588;
 }
 
 .signup-link {
@@ -78,4 +84,13 @@ button:hover {
 
 .h1{
     color: #007bff;
+}
+
+.icon {
+    display: flex;
+    justify-content: right;
+    align-items: right;
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
 }

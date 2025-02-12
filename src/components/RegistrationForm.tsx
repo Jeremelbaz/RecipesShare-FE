@@ -1,15 +1,16 @@
 import { ChangeEvent, useRef, useState } from 'react'
-import avatar from '../assets/avatar.jpg'
+import avatar from '../assets/avatar.png'
+import logo from '../assets/logo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faImage } from '@fortawesome/free-solid-svg-icons'
 import { uploadPhoto } from '../services/file-service'
 import { registrUser, googleSignin, IUser } from '../services/user-service'
 import { CredentialResponse, GoogleLogin } from '@react-oauth/google'
-import style from './RegistrationForm.module.css';
+import style from '../styles/RegistrationForm.module.css';
 
 function Registration() {
     const [imgSrc, setImgSrc] = useState<File>()
-
+ 
     const fileInputRef = useRef<HTMLInputElement>(null)
     const emailInputRef = useRef<HTMLInputElement>(null)
     const passwordInputRef = useRef<HTMLInputElement>(null)
@@ -53,11 +54,12 @@ function Registration() {
     }
     return (
         <div className="vstack gap-3 col-md-7 mx-auto">
-            <h1 className={style.h1}>Recipes&Share</h1>
-            <div className="d-flex justify-content-center position-relative">
+            <img src={logo} className={style.logo} />
+            <div className="d-flex flex-column align-items-center position-relative">
                 <img src={imgSrc ? URL.createObjectURL(imgSrc) : avatar} style={{ height: "230px", width: "230px" }} className="img-fluid" />
                 <button type="button" className={style.button} onClick={selectImg}>
-                    <FontAwesomeIcon icon={faImage} className="fa-xl" />
+                    <a>Upload picture</a>
+                    <FontAwesomeIcon icon={faImage} className={style.icon}/>
                 </button>
             </div>
 
