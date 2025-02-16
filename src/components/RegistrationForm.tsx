@@ -1,12 +1,12 @@
 import { ChangeEvent, useRef, useState } from 'react'
-import avatar from '../assets/avatar.png'
+import avatar from '../assets/user.png'
 import logo from '../assets/logo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faImage } from '@fortawesome/free-solid-svg-icons'
 import { uploadPhoto } from '../services/file-service'
 import { registrUser, googleSignin, IUser } from '../services/user-service'
 import { CredentialResponse, GoogleLogin } from '@react-oauth/google'
-import style from '../styles/RegistrationForm.module.css';
+import style from '../styles/RegistrationForm.module.css'
 
 function Registration() {
     const [imgSrc, setImgSrc] = useState<File>()
@@ -53,17 +53,17 @@ function Registration() {
         console.log("Google login failed")
     }
     return (
-        <div className="vstack gap-3 col-md-7 mx-auto">
-            <img src={logo} className={style.logo} />
-            <div className="d-flex flex-column align-items-center position-relative">
-                <img src={imgSrc ? URL.createObjectURL(imgSrc) : avatar} style={{ height: "230px", width: "230px" }} className="img-fluid" />
-                <button type="button" className={style.button} onClick={selectImg}>
-                    <a>Upload picture</a>
-                    <FontAwesomeIcon icon={faImage} className={style.icon}/>
+        <div className={`vstack gap-3 col-md-7 mx-auto ${style.myFont}`}>
+            <img src={logo} className={style.siteLogo} />
+            <div className="d-flex justify-content-center position-relative">
+                <img src={imgSrc ? URL.createObjectURL(imgSrc) : avatar} className={`${style.userImage} img-fluid`} />
+                <button type="button" className={`${style.imageButton} btn-success position-absolute bottom-0 end-0`} onClick={selectImg}>
+                    Upload Profile Picture
+                    <FontAwesomeIcon icon={faImage} className={style.cameraIcon}/>
                 </button>
             </div>
 
-            <input style={{ display: "none" }} ref={fileInputRef} type="file" onChange={imgSelected}></input>
+            <input className={style.imageSelector} ref={fileInputRef} type="file" onChange={imgSelected}></input>
 
             <div className="form-floating">
                 <input ref={emailInputRef} type="text" className="form-control" id="floatingInput" placeholder="" />
@@ -73,9 +73,10 @@ function Registration() {
                 <input ref={passwordInputRef} type="password" className="form-control" id="floatingPassword" placeholder="" />
                 <label htmlFor="floatingPassword">Password</label>
             </div>
-            <button type="button" className="btn btn-primary" onClick={register}>Register</button>
-
-            <GoogleLogin onSuccess={onGoogleLoginSuccess} onError={onGoogleLoginFailure} />
+            <button type="button" className={style.signupButton} onClick={register}>Register</button>
+            <div className={style.googleStatus}>
+                <GoogleLogin onSuccess={onGoogleLoginSuccess} onError={onGoogleLoginFailure} />
+            </div>
         </div>)
 }
 

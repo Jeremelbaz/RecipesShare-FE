@@ -1,46 +1,18 @@
-body {
-    font-family: Arial, sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@600&display=swap');
+
+.siteLogo{
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #ffffff;
 }
 
-.container {
-    text-align: center;
-    width: 400px;
-    padding: 20px;
-    background: #fff;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+.myFont{
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
 }
 
-.logo{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.h1 {
-    font-size: 28px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-
-.logo img {
-    width: 40px;
-    height: 40px;
-}
-
-.welcome-text {
-    font-size: 22px;
-    font-weight: bold;
-    margin-top: 10px;
-    margin-bottom: 20px;
+.userImage img{
+    height: "100px";
+    width: "100px";
 }
 
 input[type="text"],
@@ -52,45 +24,46 @@ input[type="password"] {
     border-radius: 5px;
 }
 
-.button {
-    width: 100%;
+.imageButton {
     padding: 10px;
-    background-color: #4caf50;
+    background-color: #93bb94;
     border: none;
-    color: white;
-    font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 15px;
 }
 
 button:hover {
     background-color: #84c588;
 }
 
-.signup-link {
-    margin-top: 15px;
-    font-size: 14px;
+.button::content{
+    font-weight: 100;
 }
 
-.signup-link a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-.signup-link a:hover {
-    text-decoration: underline;
-}
-
-.h1{
-    color: #007bff;
-}
-
-.icon {
+.cameraIcon {
     display: flex;
-    justify-content: right;
-    align-items: right;
-    background-color: #007bff;
+    justify-content: center;
+    align-items: center;
+    background-color: #435263;
     color: white;
-    border-radius: 50%;
+}
+
+.signupButton {
+    background-color:  #93bb94;
+    margin-top: 10px;
+    font-size: 25px;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.imageSelector{
+    display: none;
+}
+
+.googleStatus{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
