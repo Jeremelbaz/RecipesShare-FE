@@ -1,12 +1,12 @@
 import { ChangeEvent, useRef, useState } from 'react'
-import avatar from '../assets/user.png'
-import logo from '../assets/logo.png'
+import avatar from '../../assets/user.png'
+import logo from '../../assets/logo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faImage } from '@fortawesome/free-solid-svg-icons'
-import { uploadPhoto } from '../services/file-service'
-import { registrUser, googleSignin, IUser } from '../services/user-service'
+import { uploadPhoto } from '../../services/file-service'
+import { registrUser, googleSignin, IUser } from '../../services/user-service'
 import { CredentialResponse, GoogleLogin } from '@react-oauth/google'
-import style from '../styles/RegistrationForm.module.css'
+import style from '../../styles/RegistrationForm.module.css'
 
 function Registration() {
     const [imgSrc, setImgSrc] = useState<File>()

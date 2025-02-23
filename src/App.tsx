@@ -1,5 +1,5 @@
-import PostList from "./components/Post-list"
-import Registration from "./components/RegistrationForm"
+import PostList from "./components/Post/Post-list"
+import Registration from "./components/Auth/RegistrationForm"
 
 function App() {
   return (
