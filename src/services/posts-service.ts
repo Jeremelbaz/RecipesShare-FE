@@ -1,6 +1,6 @@
 import apiClient, { CanceledError } from "./api-client"
 
-import { PostData } from "../components/Post"
+import { PostData } from "../components/Post/Post"
 
 export { CanceledError }
 const getAllPosts = () => {
