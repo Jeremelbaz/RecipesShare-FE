@@ -2,12 +2,12 @@ import { CredentialResponse } from "@react-oauth/google"
 import apiClient from "./api-client"
 
 export interface IUser {
-    email: string,
-    password?: string,
-    imgUrl?: string,
-    _id?: string,
-    accessToken?: string,
-    refreshToken?: string
+    email: string;
+    password?: string;
+    _id?: string;
+    refreshToken?: string[];
+    profileImage?: string; // Path to the image file
+    googleId?: string;
 }
 
 export const registrUser = (user: IUser) => {
