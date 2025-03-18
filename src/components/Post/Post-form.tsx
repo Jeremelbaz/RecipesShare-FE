@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { createPost } from '../../services/posts-service'; 
 import style from '../../styles/Posts.module.css';
-import logo from '../../assets/logo.png'
+import { getUserId } from '../../services/user-service';
 
 interface PostFormProps {
   onPostCreated?: () => void; // Optional callback for when a post is created
@@ -26,15 +26,19 @@ const PostForm: React.FC<PostFormProps> = ({ onPostCreated }) => {
     setLoading(true);
     setError(null);
 
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append('content', content);
-    if (image) {
-      formData.append('image', image);
-    }
+
+    const postData = {
+      title,
+      content,
+      image: image ? URL.createObjectURL(image) : undefined,
+      owner: getUserId() || '', // Ensure owner is always a string
+      likes: [],
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
 
     try {
-      await createPost(formData);
+      await createPost(postData);
       setTitle('');
       setContent('');
       setImage(null);

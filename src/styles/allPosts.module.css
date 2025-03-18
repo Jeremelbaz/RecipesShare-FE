@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@600&display=swap');
+
+.myFont{
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+}
+
+.all_posts_container h1 {
+    font-size: 60px;
+}
+
+.post_container {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #a7efb6;
+  border-radius: 8px;
+  background-color: #f6fbf8;
+}
+
+.post_container h3{
+    color: #451414;
+}
+
+.post_container img {
+  float: right;
+  max-height: 30px;
+  width: auto;
+}
+
+.paging_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.paging {
+  display: "flex"; 
+  justify-content: center; 
+  margin-top: 20px;
+}
