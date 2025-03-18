@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@600&display=swap');
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.siteLogo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    width: 750px;
+}
+
+.myFont {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.loginButton {
+    background-color: #93bb94;
+    margin-top: 10px;
+    font-size: 25px;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.loginButton:hover {
+    background-color: #84c588;
+}
+
+.googleStatus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 200px;
+}

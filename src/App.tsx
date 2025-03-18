@@ -1,9 +1,13 @@
 import AllPosts from "./components/Post/AllPosts"
 import PostForm from "./components/Post/Post-form"
 import Registration from "./components/Auth/RegistrationForm"
+import Login from "./components/Auth/LoginForm";
+import Profile from "./components/Auth/ProfilForm";
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import Navbar from "./navBar";
+import Navbar from "./navbar";
 import "./navBar.css";
+
+
 
 //       //<PostList />
 
@@ -13,6 +17,8 @@ function App() {
       <ConditionalNavbar />
       <Routes>
         <Route path="/register" element={<Registration />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/profil" element={<Profile />} />
         <Route path="/" element={<AllPosts/>} />
         <Route path="/posts/create" element={<PostForm/>}/>
       </Routes>

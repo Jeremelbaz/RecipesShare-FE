@@ -13,6 +13,8 @@ const Navbar: React.FC = () => {
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/posts/create">New Recipe</Link></li>
                     <li><Link to="/register">Sign In</Link></li>
+                    <li><Link to="/login">Login</Link></li>
+                    <li><Link to="/profil">Profil</Link></li>
                 </ul>
             </div>
             <div className="logout">
