@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@600&display=swap');
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    background-color: #437a51;
+    padding: 10px 0;
+    border-radius: 2px; /* Add this to round the corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.myFont{
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 40px;
+    width: auto;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 8px 12px;
+}
+
+.nav-links a:hover {
+    background-color: #555;
+    border-radius: 5px;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logout a {
+    color: rgb(54, 44, 44);
+    text-decoration: none;
+    font-size: 18px;
+    padding: 8px 12px;
+    background-color: rgb(167, 222, 216);
+    border-radius: 5px;
+}
+
+.logout a:hover {
+    background-color: rgb(141, 187, 182);
+}

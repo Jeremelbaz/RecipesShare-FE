@@ -29,6 +29,8 @@ export const googleSignin = (credentialResponse: CredentialResponse) => {
         console.log("googleSignin ...")
         apiClient.post("/auth/google", credentialResponse).then((response) => {
             console.log(response)
+            localStorage.setItem('authToken', response.data.accessToken)
+            localStorage.setItem('refreshToken', response.data.refreshToken)
             resolve(response.data)
         }).catch((error) => {
             console.log(error)

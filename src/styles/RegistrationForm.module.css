@@ -1,8 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@600&display=swap');
 
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .siteLogo{
     display: flex;
     justify-content: center;
+    align-items: center;
+    height: 250px;
+    width: 750px;
 }
 
 .myFont{
@@ -48,7 +57,7 @@ button:hover {
     color: white;
 }
 
-.signupButton {
+.registerButton {
     background-color:  #93bb94;
     margin-top: 10px;
     font-size: 25px;
@@ -66,4 +75,5 @@ button:hover {
     justify-content: center;
     align-items: center;
     gap: 10px;
+    width: 200px;
 }

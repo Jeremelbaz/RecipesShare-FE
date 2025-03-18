@@ -66,7 +66,11 @@ function Registration() {
 
     return (
         <div className={`vstack gap-3 col-md-7 mx-auto ${style.myFont}`}>
-            <img src={logo} className={style.siteLogo} />
+            <div className={style.container} >
+                <div className={style.siteLogo}>
+                    <img src={logo} className={style.siteLogo} />
+                </div>
+            </div>
             <div className="d-flex justify-content-center position-relative">
                 <img src={imgSrc ? URL.createObjectURL(imgSrc) : avatar} className={`${style.userImage} img-fluid`} />
                 <button type="button" className={`${style.imageButton} btn-success position-absolute bottom-0 end-0`} onClick={selectImg}>
@@ -85,9 +89,11 @@ function Registration() {
                 <input ref={passwordInputRef} type="password" className="form-control" id="floatingPassword" placeholder="" />
                 <label htmlFor="floatingPassword">Password</label>
             </div>
-            <button type="button" className={style.signupButton} onClick={register}>Register</button>
-            <div className={style.googleStatus}>
-                <GoogleLogin onSuccess={onGoogleLoginSuccess} onError={onGoogleLoginFailure} />
+            <button type="button" className={style.registerButton} onClick={register}>Register</button>
+            <div className={style.container} >
+                <div className={style.googleStatus}>
+                    <GoogleLogin onSuccess={onGoogleLoginSuccess} onError={onGoogleLoginFailure} />
+                </div>
             </div>
         </div>)
 }

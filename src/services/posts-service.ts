@@ -14,14 +14,15 @@ export interface IPost {
 
 // Function to fetch posts
 export const getPosts = async () => {
-    try {
-      const response = await apiClient.get('/posts');
-      return response.data; // Return the data from the API response
-    } catch (error) {
-      console.error('Error fetching posts:', error);
-      throw error; // Rethrow the error to be handled by the caller
-    }
-  };
+  try {
+    const response = await apiClient.get("/posts");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    
+    throw error;
+  }
+};
 
  export const createPost = async (formData: FormData) => {
     try {
@@ -37,3 +38,15 @@ export const getPosts = async () => {
     }
   };
   
+// Fetch comments for a post
+export const getCommentsForPost = async (postId: string) => {
+  try {
+    const response = await apiClient.get("/comments", {
+      params: { postId },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching comments:", error);
+    throw error;
+  }
+};

@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { createPost } from '../../services/posts-service'; 
 import style from '../../styles/Posts.module.css';
+import logo from '../../assets/logo.png'
 
 interface PostFormProps {
   onPostCreated?: () => void; // Optional callback for when a post is created
@@ -49,42 +50,45 @@ const PostForm: React.FC<PostFormProps> = ({ onPostCreated }) => {
   };
 
   return (
-    <div className={style.postFormContainer}>
-      <h2>Create a New Post</h2>
-      {error && <p className={style.errorMessage}>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <div className={style.formGroup}>
-          <label htmlFor="title">Title:</label>
-          <input
-            type="text"
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-        </div>
-        <div className={style.formGroup}>
-          <label htmlFor="content">Content:</label>
-          <textarea
-            id="content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            required
-          />
-        </div>
-        <div className={style.formGroup}>
-          <label htmlFor="image">Image (Optional):</label>
-          <input
-            type="file"
-            id="image"
-            accept="image/*"
-            onChange={handleImageChange}
-          />
-        </div>
-        <button type="submit" disabled={loading}>
-          {loading ? 'Creating...' : 'Create Post'}
-        </button>
-      </form>
+    <div>
+      <div className={`${style.postFormContainer} ${style.myFont}`}>
+        <h2>Create a New Recipe</h2>
+        {error && <p className={style.errorMessage}>{error}</p>}
+        <form onSubmit={handleSubmit}>
+          <div className={style.formGroup}>
+            <label htmlFor="title">Title:</label>
+            <input
+              type="text"
+              id="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+            />
+          </div>
+          <div className={style.formGroup}>
+            <label htmlFor="content">Content:</label>
+            <p>Ingridients and perparation steps...</p>
+            <textarea
+              id="content"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              required
+            />
+          </div>
+          <div className={style.formGroup}>
+            <label htmlFor="image">Image (Optional):</label>
+            <input
+              type="file"
+              id="image"
+              accept="image/*"
+              onChange={handleImageChange}
+            />
+          </div>
+          <button type="submit" disabled={loading}>
+            {loading ? 'Creating...' : 'Create Post'}
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
