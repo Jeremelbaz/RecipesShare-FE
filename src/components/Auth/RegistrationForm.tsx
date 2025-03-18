@@ -6,11 +6,12 @@ import { faImage } from '@fortawesome/free-solid-svg-icons'
 import { uploadPhoto } from '../../services/file-service'
 import { registrUser, googleSignin, IUser } from '../../services/user-service'
 import { CredentialResponse, GoogleLogin } from '@react-oauth/google'
+import { useNavigate } from 'react-router-dom';
 import style from '../../styles/RegistrationForm.module.css'
 
 function Registration() {
     const [imgSrc, setImgSrc] = useState<File>()
- 
+    const navigate = useNavigate();
     const fileInputRef = useRef<HTMLInputElement>(null)
     const emailInputRef = useRef<HTMLInputElement>(null)
     const passwordInputRef = useRef<HTMLInputElement>(null)
@@ -26,16 +27,23 @@ function Registration() {
     }
 
     const register = async () => {
-        const url = await uploadPhoto(imgSrc!);
-        console.log("upload returned:" + url);
+        console.log("registering user");
+        //const url = await uploadPhoto(imgSrc!);
+        //console.log("upload returned:" + url);
         if (emailInputRef.current?.value && passwordInputRef.current?.value) {
             const user: IUser = {
                 email: emailInputRef.current?.value,
                 password: passwordInputRef.current?.value,
-                imgUrl: url
+              //  profileImage: url
             }
-            const res = await registrUser(user)
-            console.log(res)
+            try{
+                const res = await registrUser(user)
+                console.log(res)
+                navigate('/');
+            } catch (error){
+                console.error("Registration Failed, error: " + error)
+            }
+            
         }
     }
 
@@ -44,6 +52,8 @@ function Registration() {
         try {
             const res = await googleSignin(credentialResponse)
             console.log(res)
+            // navigate to /
+            navigate('/');
         } catch (e) {
             console.log(e)
         }
@@ -52,9 +62,15 @@ function Registration() {
     const onGoogleLoginFailure = () => {
         console.log("Google login failed")
     }
+
+
     return (
         <div className={`vstack gap-3 col-md-7 mx-auto ${style.myFont}`}>
-            <img src={logo} className={style.siteLogo} />
+            <div className={style.container} >
+                <div className={style.siteLogo}>
+                    <img src={logo} className={style.siteLogo} />
+                </div>
+            </div>
             <div className="d-flex justify-content-center position-relative">
                 <img src={imgSrc ? URL.createObjectURL(imgSrc) : avatar} className={`${style.userImage} img-fluid`} />
                 <button type="button" className={`${style.imageButton} btn-success position-absolute bottom-0 end-0`} onClick={selectImg}>
@@ -73,9 +89,11 @@ function Registration() {
                 <input ref={passwordInputRef} type="password" className="form-control" id="floatingPassword" placeholder="" />
                 <label htmlFor="floatingPassword">Password</label>
             </div>
-            <button type="button" className={style.signupButton} onClick={register}>Register</button>
-            <div className={style.googleStatus}>
-                <GoogleLogin onSuccess={onGoogleLoginSuccess} onError={onGoogleLoginFailure} />
+            <button type="button" className={style.registerButton} onClick={register}>Register</button>
+            <div className={style.container} >
+                <div className={style.googleStatus}>
+                    <GoogleLogin onSuccess={onGoogleLoginSuccess} onError={onGoogleLoginFailure} />
+                </div>
             </div>
         </div>)
 }

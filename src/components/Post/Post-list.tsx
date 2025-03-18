@@ -1,38 +1,56 @@
-import { useEffect, useState } from 'react'
-import Post, { PostData } from './Post'
-import postService, { CanceledError } from "../../services/posts-service"
+import React, { useState, useEffect } from 'react';
+import logo from '../../assets/logo.png';
+import { getPosts, IPost } from '../../services/posts-service';
+import { useNavigate } from 'react-router-dom';
+import style from '../../styles/Posts.module.css';
 
-function PostList() {
-    const [posts, setPosts] = useState<PostData[]>([])
-    const [error, setError] = useState()
+function PostList() { // Renamed the component to PostList for clarity
+    const navigate = useNavigate();
+    const [posts, setPosts] = useState<IPost[]>([]);
+    const [error, setError] = useState<string | null>(null);
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
-        const { req, abort } = postService.getAllPosts()
-        req.then((res) => {
-            setPosts(res.data)
-        }).catch((err) => {
-            console.log(err)
-            if (err instanceof CanceledError) return
-            setError(err.message)
-        })
-        return () => {
-            abort()
-        }
-    }, [])
+        const fetchPosts = async () => {
+            setLoading(true);
+            setError(null);
+            try {
+                const fetchedPosts = await getPosts();
+                setPosts(fetchedPosts);
+            } catch (err) {
+                setError((err as Error).message);
+                console.error("Error fetching posts:", err);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchPosts();
+    }, []);
+
+    if (loading) {
+        return <p>Loading posts...</p>;
+    }
+
+    if (error) {
+        return <p className='text-danger'>{error}</p>;
+    }
 
     return (
-        <>
-            {/* {alertVisibility && <Alert onDismiss={() => { setAlertVisibvility(false) }}>This is my alert</Alert>}
-      <button type="button" className="btn btn-primary" onClick={() => setAlertVisibvility(!alertVisibility)}>Toggle Alert</button> */}
-
-            {error && <p className='text-danger'>{error}</p>}
-            {posts.map((post, index) =>
-                <div className="p-4" key={index}>
-                    <Post post={post} />
+        <div className={`vstack gap-3 col-md-7 mx-auto ${style.myFont}`}>
+            <img src={logo} className={style.siteLogo} />
+            {posts.map((post, index) => (
+                <div key={index} className={style.postItem}>
+                    <h3>{post.title}</h3>
+                    <p>{post.content}</p>
+                    <p>Owner: {post.owner}</p>
+                    {post.image && <img src={post.image} alt="Post Image" className={style.postImage} />}
+                    <p>Likes: {post.likes.length}</p>
+                    <p>Created At: {new Date(post.createdAt).toLocaleString()}</p>
+                    <p>Updated At: {new Date(post.updatedAt).toLocaleString()}</p>
                 </div>
-            )}
-        </>
-
-    )
+            ))}
+        </div>
+    );
 }
 
-export default PostList
+export default PostList;

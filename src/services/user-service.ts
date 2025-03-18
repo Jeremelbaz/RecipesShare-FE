@@ -2,12 +2,12 @@ import { CredentialResponse } from "@react-oauth/google"
 import apiClient from "./api-client"
 
 export interface IUser {
-    email: string,
-    password?: string,
-    imgUrl?: string,
-    _id?: string,
-    accessToken?: string,
-    refreshToken?: string
+    email: string;
+    password?: string;
+    _id?: string;
+    refreshToken?: string[];
+    profileImage?: string; // Path to the image file
+    googleId?: string;
 }
 
 export const registrUser = (user: IUser) => {
@@ -29,6 +29,8 @@ export const googleSignin = (credentialResponse: CredentialResponse) => {
         console.log("googleSignin ...")
         apiClient.post("/auth/google", credentialResponse).then((response) => {
             console.log(response)
+            localStorage.setItem('authToken', response.data.accessToken)
+            localStorage.setItem('refreshToken', response.data.refreshToken)
             resolve(response.data)
         }).catch((error) => {
             console.log(error)
