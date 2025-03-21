@@ -2,6 +2,7 @@ import AllPosts from "./components/Post/AllPosts"
 import PostForm from "./components/Post/Post-form"
 import Registration from "./components/Auth/RegistrationForm"
 import Login from "./components/Auth/LoginForm";
+// import Profil from "./components/Auth/ProfilForm";
 import Profile from "./components/Auth/ProfilForm";
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from "./navbar";

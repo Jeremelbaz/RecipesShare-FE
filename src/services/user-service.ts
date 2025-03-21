@@ -25,6 +25,35 @@ export const registrUser = (user: IUser) => {
     })
 }
 
+export const updateProfilePicture = (file: File) => {
+    return new Promise<IUser>((resolve, reject) => {
+        console.log("Updating profile picture...");
+
+        const formData = new FormData();
+        formData.append("profileImage", file);
+
+        const token = localStorage.getItem('authToken'); // Get auth token
+        if (!token) {
+            reject("No auth token found");
+            return;
+        }
+
+        apiClient.put("/auth/profile/picture", formData, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "multipart/form-data"
+            }
+        }).then((response) => {
+            console.log(response);
+            resolve(response.data);
+        }).catch((error) => {
+            console.error("Error updating profile picture:", error);
+            reject(error);
+        });
+    });
+};
+
+
 export const loginUser = (user: IUser) => {
     return new Promise<IUser>((resolve, reject) => {
         console.log("Logging in user...")

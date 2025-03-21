@@ -28,13 +28,13 @@ function Registration() {
 
     const register = async () => {
         console.log("registering user");
-        //const url = await uploadPhoto(imgSrc!);
-        //console.log("upload returned:" + url);
+        const url = await uploadPhoto(imgSrc!);
+        console.log("upload returned:" + url);
         if (emailInputRef.current?.value && passwordInputRef.current?.value) {
             const user: IUser = {
                 email: emailInputRef.current?.value,
                 password: passwordInputRef.current?.value,
-              //  profileImage: url
+                profileImage: url
             }
             try{
                 const res = await registrUser(user)
