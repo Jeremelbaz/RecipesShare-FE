@@ -83,7 +83,7 @@ const PostDetails: React.FC = () => {
         }
     };
 
-    if (loading) return <div className={style.loading}>Loading...</div>;
+    if (loading) return <div className={style.progress_bar}><p>Loading...</p></div>;
     if (error) return <div>{error}</div>;
     if (!post) return <div>Post not found.</div>;
 

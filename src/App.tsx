@@ -1,12 +1,11 @@
 import AllPosts from "./components/Post/AllPosts"
 import PostForm from "./components/Post/Post-form"
 import Registration from "./components/Auth/RegistrationForm"
+import Login from "./components/Auth/LoginForn";
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from "./navbar";
 import "./navBar.css";
 import PostDetails from "./components/Post/PostDetails";
-
-//       //<PostList />
 
 function App() {
   return (
@@ -14,7 +13,8 @@ function App() {
       <ConditionalNavbar />
       <Routes>
         <Route path="/register" element={<Registration />} />
-        <Route path="/" element={<AllPosts/>} />
+        <Route path="/posts" element={<AllPosts/>} />
+        <Route path="/" element={<Login/>} />
         <Route path="/posts/create" element={<PostForm/>}/>
         <Route path='/posts/:postId' element={<PostDetails/>}/>
       </Routes>
@@ -25,8 +25,8 @@ function App() {
 const ConditionalNavbar: React.FC = () => {
   const location = useLocation();
 
-  // Hide Navbar only on the /register page
-  if (location.pathname === "/register") {
+  // Hide Navbar only on the /register and sign in pages
+  if (location.pathname === "/register" || location.pathname === "/") {
     return null;
   }
 

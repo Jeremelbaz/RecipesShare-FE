@@ -10,7 +10,7 @@
 }
 
 .post_details_container {
-  max-width: 1000px;
+  max-width: 80%;
   margin: 20px auto;
   padding: 20px;
   border: 1px solid #a7efb6;
@@ -43,11 +43,36 @@
     line-height: 0.9;
 }
 
-.loading{
-    display: inline-block;
-    font-size: 75px;
-    width: 100px;
-    height: 100px;
-    border: 3px solid rgba(0, 0, 0, 0.3);
-    border-radius: 50%;
+.progress_bar {
+  width: 100%;
+  background-color: #f0f0f0;
+  height: 10px;
+}
+
+.progress_bar p{
+  font-size: 40px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.progress_bar::after {
+  content: "";
+  display: block;
+  background-color: rgb(108, 165, 153);
+  height: 10px;
+  width: 0%;
+  animation: progress 2s linear forwards;
+}
+
+@keyframes progress {
+  to {
+    width: 100%;
+  }
 }

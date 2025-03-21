@@ -5,7 +5,7 @@ import style from '../../styles/Posts.module.css';
 import { getUserId } from '../../services/user-service';
 
 interface PostFormProps {
-  onPostCreated?: () => void; // Optional callback for when a post is created
+  onPostCreated?: () => void;
 }
 
 const PostForm: React.FC<PostFormProps> = ({ onPostCreated }) => {
@@ -14,6 +14,8 @@ const PostForm: React.FC<PostFormProps> = ({ onPostCreated }) => {
   const [image, setImage] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -25,7 +27,7 @@ const PostForm: React.FC<PostFormProps> = ({ onPostCreated }) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-
+    setSuccessMessage(null);
 
     const postData = {
       title,
@@ -42,6 +44,7 @@ const PostForm: React.FC<PostFormProps> = ({ onPostCreated }) => {
       setTitle('');
       setContent('');
       setImage(null);
+      setSuccessMessage('Recipe created successfully!');
       if (onPostCreated) {
         onPostCreated();
       }
@@ -58,6 +61,7 @@ const PostForm: React.FC<PostFormProps> = ({ onPostCreated }) => {
       <div className={`${style.postFormContainer} ${style.myFont}`}>
         <h2>Create a New Recipe</h2>
         {error && <p className={style.errorMessage}>{error}</p>}
+        {successMessage && <p className={style.successMessage}>{successMessage}</p>}
         <form onSubmit={handleSubmit}>
           <div className={style.formGroup}>
             <label htmlFor="title">Title:</label>

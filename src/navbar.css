@@ -60,15 +60,16 @@
     gap: 20px;
 }
 
-.logout a {
+.logout {
     color: rgb(54, 44, 44);
     text-decoration: none;
     font-size: 18px;
     padding: 8px 12px;
     background-color: rgb(167, 222, 216);
     border-radius: 5px;
+    margin-right: 10px;
 }
 
-.logout a:hover {
+.logout button:hover {
     background-color: rgb(141, 187, 182);
 }

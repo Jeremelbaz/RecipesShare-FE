@@ -35,12 +35,12 @@ const AllPosts: React.FC = () => {
     // Change page
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <div className={style.progress_bar}><p>Loading...</p></div>;
     if (error) return <div>{error}</div>;
 
     return (
         <div className={`${style.all_posts_container} ${style.myFont}`}>
-            <h1>All Posts</h1>
+            <h1></h1>
             <div>
                 {currentPosts.map((post) => (
                     <div key={post._id} className={`${style.post_container} post-card`}>
@@ -48,7 +48,7 @@ const AllPosts: React.FC = () => {
                         <h5>Created by: {post.owner.email || "" }</h5>
                         <h6>likes: {post.likes.length}</h6>
                         {post.image && <img src={post.image} alt="Post Image" className={style.postImage} />}
-                        <p>{post.content}</p>
+                        <p className={style.postContentTruncated}>{post.content}</p>
                         <Link to={`/posts/${post._id}`}>Read More...</Link>
                     </div>
                 ))}
