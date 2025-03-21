@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { logoutUser } from './services/user-service';
-import logo from "./assets/logo.png"
+import recipeshare_logo from "./assets/recipeshare_logo.png"
 
 const Navbar: React.FC = () => {
     const navigate = useNavigate();
@@ -19,12 +19,13 @@ const Navbar: React.FC = () => {
     return (
         <nav className="navbar myFont">
             <div className="nav-left">
-                <Link to="/" className='logo-container myFont'>
-                    <img src={logo} alt="Logo" className="logo" />
+                <Link to="/posts" className='logo-container'>
+                    <img src={recipeshare_logo} alt="Logo" className="logo" />
                 </Link>
                 <ul className="nav-links">
-                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="/posts">Home</Link></li>
                     <li><Link to="/posts/create">New Recipe</Link></li>
+                    <li ><Link to="/profile">My Profile</Link></li>
                     <li><Link to="/">Sign In</Link></li>
                 </ul>
             </div>

@@ -2,6 +2,7 @@ import AllPosts from "./components/Post/AllPosts"
 import PostForm from "./components/Post/Post-form"
 import Registration from "./components/Auth/RegistrationForm"
 import Login from "./components/Auth/LoginForn";
+import Profile from "./components/Profile/Profile";
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from "./navbar";
 import "./navBar.css";
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<Login/>} />
         <Route path="/posts/create" element={<PostForm/>}/>
         <Route path='/posts/:postId' element={<PostDetails/>}/>
+        <Route path='/profile' element={<Profile/>}/>
       </Routes>
     </BrowserRouter>
   )

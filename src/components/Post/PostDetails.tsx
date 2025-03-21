@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getPostById, getCommentsForPost, addComment, likePost, getPostAnalysis } from "../../services/posts-service";
+import { getUserById } from "../../services/user-service";
 import style from "../../styles/postDetails.module.css";
 
 
@@ -38,7 +39,8 @@ const PostDetails: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const [analysis, setAnalysis] = useState<any>(null);
     const [analysisLoading, setAnalysisLoading] = useState<boolean>(false);
-
+    const [userNames, setUserNames] = useState<Record<string, string>>({});
+    
     useEffect(() => {
         const fetchPostDetails = async () => {
             setLoading(true);
@@ -114,7 +116,7 @@ const PostDetails: React.FC = () => {
             <div>
                 {comments.map((comment: any) => (
                     <div key={comment._id} className={style.comment}>
-                        <p>add user who created comment: {comment.content} , Commented at: {formatTimestamp(comment.createdAt)}</p>
+                        <p>{comment.owner.email}: {comment.content} , Commented at: {formatTimestamp(comment.createdAt)}</p>
                     </div>
                 ))}
             </div>

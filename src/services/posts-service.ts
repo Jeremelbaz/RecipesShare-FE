@@ -1,4 +1,5 @@
 import apiClient, { CanceledError } from "./api-client"
+import { getUserId } from "./user-service";
 
 import { PostData } from "../components/Post/Post"
 
@@ -45,6 +46,7 @@ export const getCommentsForPost = async (postId: string) => {
     const response = await apiClient.get("/comments", {
       params: { postId },
     });
+    console.log('comments' + response.data[0]);
     return response.data;
   } catch (error) {
     console.error("Error fetching comments:", error);
@@ -93,6 +95,42 @@ export const getPostAnalysis = async (postId: string) => {
       return response.data.analysis;
   } catch (error) {
       console.error("Error fetching post analysis:", error);
+      throw error;
+  }
+};
+
+export const fetchUserPosts = async () => {
+  try {
+      const currUser = getUserId()
+      if (currUser){
+        const response = await apiClient.get("/posts", {
+          params: { id: currUser},
+        });
+        return response.data;
+      }
+      
+  } catch (error) {
+      console.error("Error fetching user posts:", error);
+      throw error;
+  }
+};
+
+export const deletePost = async (postId: string) => {
+  try {
+      const response = await apiClient.delete(`/posts/${postId}`);
+      return response.data;
+  } catch (error) {
+      console.error("Error deleting post:", error);
+      throw error;
+  }
+};
+
+export const updatePost = async (id: String, updatedPost: PostData) => {
+  try {
+      const response = await apiClient.put(`/posts/${id}`, updatedPost);
+      return response.data;
+  } catch (error) {
+      console.error("Error updating post:", error);
       throw error;
   }
 };
