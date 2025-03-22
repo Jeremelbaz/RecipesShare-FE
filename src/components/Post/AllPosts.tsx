@@ -46,8 +46,8 @@ const AllPosts: React.FC = () => {
                     <div key={post._id} className={`${style.post_container} post-card`}>
                         <h3>Recipe: {post.title}</h3>
                         <h5>Created by: {post.owner.email || "" }</h5>
-                        <h6>likes: {post.likes.length}</h6>
                         {post.image && <img src={post.image} alt="Post Image" className={style.postImage} />}
+                        <h6>likes: {post.likes.length}</h6>
                         <p className={style.postContentTruncated}>{post.content}</p>
                         <Link to={`/posts/${post._id}`}>Read More...</Link>
                     </div>

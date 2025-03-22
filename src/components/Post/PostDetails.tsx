@@ -20,10 +20,9 @@ function formatTimestamp(timestamp: string): string {
 }
 
 function formatAnalysis(analysisString: string): string {
-    if (!analysisString) return ""; // Handle empty or undefined input
+    if (!analysisString) return "";
 
     const items = analysisString.split(/\d+\.\s/);
-    // Remove the first empty element if it exists
     if (items[0] === "") {
         items.shift();
     }
@@ -67,15 +66,15 @@ const PostDetails: React.FC = () => {
     const handleAddComment = async () => {
         if (newComment.trim()) {
             try {
-                const addedComment = await addComment(postId!, newComment);
-                setComments([...comments, addedComment]);
+                await addComment(postId!, newComment); 
+                const fetchedComments = await getCommentsForPost(postId!); 
+                setComments(fetchedComments);
                 setNewComment("");
             } catch (err) {
                 console.error("Error adding comment:", err);
             }
         }
     };
-
     const handleLikePost = async () => {
         try {
             const updatedPost = await likePost(postId!);
@@ -94,11 +93,11 @@ const PostDetails: React.FC = () => {
             <h1>Recipe</h1>
             <h2>{post.title}</h2>
             <h5>Created by: {post.owner.email || ""}</h5>
+            {post.image && <img src={post.image} alt="Post Image" className={style.postImage} />}
             <hr/>
             <h6>Created At: {formatTimestamp(post.createdAt)}</h6>
             <h6>Updated At: {formatTimestamp(post.updatedAt)}</h6>
             <h4>Likes: {post.likes.length}</h4>
-            {post.image && <img src={post.image} alt="Post Image" className={style.postImage} />}
             <button onClick={handleLikePost}>Like</button>
             <hr/>
             <h4>Gemini's Advice</h4>

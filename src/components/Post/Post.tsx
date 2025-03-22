@@ -1,9 +1,9 @@
 export interface PostData {
     title: string;
     content: string;
-    owner: string; // ref to user
-    image?: string; // path to image in server
-    likes: string[]; // array of users' ids that liked the post
+    owner: string;
+    image?: string;
+    likes: string[];
     createdAt: Date; 
     updatedAt: Date; 
 }

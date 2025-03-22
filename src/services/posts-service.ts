@@ -6,9 +6,9 @@ import { PostData } from "../components/Post/Post"
 export interface IPost {
     title: string;
     content: string;
-    owner: string; // ref to user
-    image?: string; // path to image in server
-    likes: string[]; // array of users' ids that liked the post
+    owner: string;
+    image?: string; 
+    likes: string[]; 
     createdAt: Date; 
     updatedAt: Date; 
 }
@@ -28,7 +28,6 @@ export const createPost = async (postData: PostData) => {
   }
 };
 
-// Function to fetch posts
 export const getPosts = async () => {
   try {
     const response = await apiClient.get("/posts");
@@ -40,7 +39,6 @@ export const getPosts = async () => {
   }
 };
   
-// Fetch comments for a post
 export const getCommentsForPost = async (postId: string) => {
   try {
     const response = await apiClient.get("/comments", {
@@ -54,7 +52,6 @@ export const getCommentsForPost = async (postId: string) => {
   }
 };
 
-// Fetch post by ID
 export const getPostById = async (postId: string) => {
   try {
     const response = await apiClient.get(`/posts/${postId}`);
@@ -65,7 +62,6 @@ export const getPostById = async (postId: string) => {
   }
 };
 
-// create a comment to a post
 export const addComment = async (postId: string, content: string) => {
   try {
       const response = await apiClient.post("/comments", { postId, content });
@@ -76,7 +72,6 @@ export const addComment = async (postId: string, content: string) => {
   }
 };
 
-// like / unlike a post
 export const likePost = async (postId: string) => {
   try {
       const response = await apiClient.post(`/posts/${postId}/like`);
@@ -87,7 +82,6 @@ export const likePost = async (postId: string) => {
   }
 };
 
-// Get post analyzed 
 export const getPostAnalysis = async (postId: string) => {
   try {
       const response = await apiClient.get(`/posts/${postId}/analyze`);
@@ -104,7 +98,7 @@ export const fetchUserPosts = async () => {
       const currUser = getUserId()
       if (currUser){
         const response = await apiClient.get("/posts", {
-          params: { id: currUser},
+          params: { owner: currUser},
         });
         return response.data;
       }

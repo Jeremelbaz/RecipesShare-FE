@@ -15,6 +15,7 @@ function Registration() {
     const fileInputRef = useRef<HTMLInputElement>(null)
     const emailInputRef = useRef<HTMLInputElement>(null)
     const passwordInputRef = useRef<HTMLInputElement>(null)
+    const [uploading, setUploading] = useState(false);
     const imgSelected = (e: ChangeEvent<HTMLInputElement>) => {
         console.log(e.target.value)
         if (e.target.files && e.target.files.length > 0) {
@@ -28,24 +29,37 @@ function Registration() {
 
     const register = async () => {
         console.log("registering user");
-        //const url = await uploadPhoto(imgSrc!);
-        //console.log("upload returned:" + url);
         if (emailInputRef.current?.value && passwordInputRef.current?.value) {
+            let imageUrl: string | undefined = undefined;
+      
+            if (imgSrc) {
+              setUploading(true);
+              try {
+                imageUrl = await uploadPhoto(imgSrc);
+              } catch (error) {
+                console.error('Image upload failed:', error);
+                setUploading(false); 
+                return;
+              } finally{
+                setUploading(false);
+              }
+            }
+      
             const user: IUser = {
-                email: emailInputRef.current?.value,
-                password: passwordInputRef.current?.value,
-              //  profileImage: url
+              email: emailInputRef.current?.value,
+              password: passwordInputRef.current?.value,
+              profileImage: imageUrl,
+            };
+      
+            try {
+              const res = await registrUser(user);
+              console.log(res);
+              navigate('/');
+            } catch (error) {
+              console.error('Registration failed:', error);
             }
-            try{
-                const res = await registrUser(user)
-                console.log(res)
-                navigate('/');
-            } catch (error){
-                console.error("Registration Failed, error: " + error)
-            }
-            
+          }
         }
-    }
 
     const onGoogleLoginSuccess = async (credentialResponse: CredentialResponse) => {
         console.log(credentialResponse)
@@ -73,10 +87,15 @@ function Registration() {
             </div>
             <div className="d-flex justify-content-center position-relative">
                 <img src={imgSrc ? URL.createObjectURL(imgSrc) : avatar} className={`${style.userImage} img-fluid`} />
-                <button type="button" className={`${style.imageButton} btn-success position-absolute bottom-0 end-0`} onClick={selectImg}>
-                    Upload Profile Picture
-                    <FontAwesomeIcon icon={faImage} className={style.cameraIcon}/>
-                </button>
+                <button
+                    type="button"
+                    className={`${style.imageButton} btn-success position-absolute bottom-0 end-0`}
+                    onClick={selectImg}
+                    disabled={uploading} // Disable button during upload
+                    >
+                    {uploading ? 'Uploading...' : 'Upload Profile Picture'}
+                    <FontAwesomeIcon icon={faImage} className={style.cameraIcon} />
+                    </button>
             </div>
 
             <input className={style.imageSelector} ref={fileInputRef} type="file" onChange={imgSelected}></input>

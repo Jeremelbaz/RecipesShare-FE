@@ -22,9 +22,9 @@
     color: #451414;
 }
 
-.postImage img {
+.postImage {
   float: center;
-  max-height: 60px;
+  max-height: 200px;
   width: auto;
 }
 

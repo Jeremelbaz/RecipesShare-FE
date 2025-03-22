@@ -19,7 +19,7 @@ function Login() {
                     password: passwordInputRef.current.value
                 });
                 console.log(res);
-                navigate('/');
+                navigate('/posts');
             } catch (error) {
                 console.error("Login Failed, error: " + error);
             }

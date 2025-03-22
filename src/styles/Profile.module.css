@@ -27,27 +27,45 @@
 
 }
 
-.profileImage {
+.textStyle{
+  resize: both;
+}
+
+.userImage {
   float: center;
-  height: 150px;
-  width: auto;
+  height: auto;
+  width: 150px;
   border-radius: 30px;
 }
 
-.insetComment{
-    display: flex;
-    align-items: center;
+.selectimg {
+  height: 30px;
 }
 
-.textComment{
-    flex: 1;
-    margin-right: 10px;
+.recipeContainer{
+  max-width: 95%;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #a7efb6;
+  border-radius: 8px;
+  background-color: #f6fbf8;
 }
 
-.analyze{
-    white-space: pre-line;
-    line-height: 0.9;
+.recipeContainer div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+
+.recipeContainer button{
+  display: flex;
+  flex-direction: row; /* Display items in a row */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  gap: 20px
+}
+
 
 .progress_bar {
   width: 100%;

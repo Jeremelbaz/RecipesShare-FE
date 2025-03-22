@@ -75,7 +75,9 @@ export const logoutUser = () => {
                 });
             }
 
-            localStorage.clear(); // Clear all localStorage items
+            localStorage.removeItem('authToken')
+            localStorage.removeItem('refreshToken')
+            localStorage.removeItem('userId')
             resolve();
         } catch (error) {
             console.error("Logout failed:", error);
@@ -110,44 +112,25 @@ export const fetchUserProfile = () => {
       });
 };
 
-export const updateProfilePicture = (file: File) => {
+
+export const updateUser = (updatedUser: Partial<IUser>) => {
     return new Promise<IUser>((resolve, reject) => {
-        console.log("Updating profile picture...");
-
-        const formData = new FormData();
-        formData.append("profileImage", file);
-
-        const token = localStorage.getItem('authToken'); // Get auth token
-        if (!token) {
-            reject("No auth token found");
-            return;
-        }
-
-        apiClient.put("/auth/profile/picture", formData, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "multipart/form-data"
-            }
-        }).then((response) => {
-            console.log(response);
-            resolve(response.data);
-        }).catch((error) => {
-            console.error("Error updating profile picture:", error);
-            reject(error);
-        });
-    });
-};
-
-
-export const updateUser = (userId: string, updatedUser: Partial<IUser>) => {
-    return new Promise<IUser>((resolve, reject) => {
+      const currUser = getUserId();
+      if (currUser) {
         apiClient
-        .put(`/auth/${userId}`, updatedUser)
-        .then((response) => {
-            resolve(response.data);
-        })
-        .catch((error) => {
+          .put(`/auth/${currUser}`, updatedUser)
+          .then((response) => {
+            if (response.status === 200) {
+              resolve(response.data);
+            } else {
+              reject(new Error(`Update user failed with status: ${response.status}`));
+            }
+          })
+          .catch((error) => {
             reject(error);
-        });
+          });
+      } else {
+          reject(new Error("No user id present."));
+      }
     });
-}; 
+  };
